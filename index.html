@@ -16,12 +16,17 @@
     <main class="content">
       <!--Секция-->
       <section class="profile content__profile">
-        <img class="avatar profile__avatar" src="./images/avatar_profile.jpg">
-        <div class="info profile__info">
-          <p class="name">Жак-Ив Кусто</p>
-          <p class="about">Исследователь океана</p>
+        <div class="profile__wrap"> <!--Обертка для Аватара и инфо. Иначе не могу расположить кнопку не используя отступы-->
+          <img class="avatar profile__avatar" src="./images/avatar_profile.jpg">
+          <div class="info profile__info">
+            <div class="info__row"><!-- Будет ли это лишней оберткой? Хочу сделать Имя и кнопку редактирования одной строкой-->
+              <p class="name">Жак-Ив Кусто</p>
+              <div class="info__button-edit profile__button"></div>
+            </div>
+            <p class="info__about">Исследователь океана</p>
+          </div>
         </div>
-        <div class="button profile__button"></div>
+        <div class="profile__button-add"></div>
       </section>
     </main>
     <!--Футер-->

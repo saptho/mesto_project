@@ -1,0 +1,4 @@
+.info__row {
+  display: flex;
+  align-items: baseline;
+}
