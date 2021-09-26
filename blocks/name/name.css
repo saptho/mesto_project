@@ -4,4 +4,22 @@
   line-height: 48px;
   font-style: normal;
   font-weight: 500px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 800px) {
+  .name {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .name {
+    font-size: 27px;
+    line-height: 32px;
+    text-align: center;
+  }
 }

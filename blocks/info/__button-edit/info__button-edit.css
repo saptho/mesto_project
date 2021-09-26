@@ -13,3 +13,10 @@
   opacity: .6;
   cursor: pointer;
 }
+
+@media screen and (max-width: 470px) {
+  .info__button-edit {
+    width: 18px;
+    height: 18px;
+  }
+}

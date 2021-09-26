@@ -6,3 +6,11 @@
   font-style: normal;
   line-height: 21.78px;
 }
+
+@media screen and (max-width: 400px) {
+  .info__about {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}
