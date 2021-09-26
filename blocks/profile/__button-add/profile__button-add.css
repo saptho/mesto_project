@@ -7,4 +7,10 @@
   width: 150px;
   height: 50px;
   align-self: center;
+  background-color: #000;
+}
+
+.profile__button-add:hover {
+  opacity: .6;
+  cursor: pointer;
 }

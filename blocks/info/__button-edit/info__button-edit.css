@@ -6,4 +6,10 @@
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
+  background-color: #000;
+}
+
+.info__button-edit:hover {
+  opacity: .6;
+  cursor: pointer;
 }
