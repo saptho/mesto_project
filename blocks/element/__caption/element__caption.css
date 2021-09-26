@@ -1,9 +1,9 @@
 .element__caption {
-  background-color: #fff;
   color: #000;
-  font-size: 24px;
-  line-height: 29.05px;
-  font-weight: 900;
-  margin: 0;
-  padding: 25px 21px 31px;
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 21px;
 }

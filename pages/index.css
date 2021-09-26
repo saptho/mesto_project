@@ -25,3 +25,5 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__card/element__card.css);
+@import url(../blocks/button-like/button-like.css);
+@import url(../blocks/caption/caption.css);
