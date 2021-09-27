@@ -10,7 +10,7 @@
 * модальное окно popup, которое открывается и закрывается по нажатию на кнопки :sparkles:
 * форма, передающая информацию из полей в разметку по событию submit.
 
-[Проект](https://saptho.github.io/russian-travel_project/index.html) на GitHub Pages.
+[Проект](https://saptho.github.io/mesto_project/index.html) на GitHub Pages.
 
 ### Технологии
 
