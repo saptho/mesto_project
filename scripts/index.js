@@ -28,8 +28,12 @@ modalWindow.addEventListener('click', onOverlayClick)
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = formFieldName.value;
-  profileInfoAbout.textContent = formFieldAbout.value;
+
+  let profileNameNew = formFieldName.value;
+  let profileInfoAboutNew = formFieldAbout.value;
+  profileName.textContent = profileNameNew;
+  profileInfoAbout.textContent = profileInfoAboutNew;
+  toggleModalWindow();
 }
 
 formProfile.addEventListener ('submit', formSubmitHandler);
