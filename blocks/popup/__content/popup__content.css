@@ -11,3 +11,16 @@
   box-sizing: border-box;
   position: relative;
 }
+
+@media screen and (max-width: 500px) {
+  .popup__content {
+    max-width: 360px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .popup__content {
+    max-width: 282px;
+    padding: 25px 22px;
+  }
+}

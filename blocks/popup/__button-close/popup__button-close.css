@@ -7,10 +7,20 @@
   padding: 0;
   cursor: pointer;
   position: absolute;
-  top: 115px;
-  right: 385px;
+  top: -40px;
+  right: -40px;
 }
 
 .popup__button-close:hover {
   opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 530px) {
+  .popup__button-close {
+    width: 20px;
+    height: 20px;
+    top: -40px;
+    right: 0;
+  }
 }

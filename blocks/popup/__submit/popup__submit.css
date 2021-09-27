@@ -8,3 +8,16 @@
   line-height: 22px;
   padding: 14px 125px 18px;
 }
+
+.popup__submit:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__submit {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 14px 82px;
+  }
+}
