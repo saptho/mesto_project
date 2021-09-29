@@ -1,7 +1,7 @@
 .popup__submit {
   background-color: #000;
   color: #fff;
-  border: 1px solid #000;
+  border: none;
   border-radius: 2px;
   font-family: Inter, Arial, sans-serif;
   font-size: 18px;
