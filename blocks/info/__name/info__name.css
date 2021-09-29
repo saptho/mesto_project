@@ -1,4 +1,4 @@
-.name {
+.info__name {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .name {
+  .info__name {
     font-size: 32px;
     line-height: 36px;
     max-width: 250px;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (max-width: 400px) {
-  .name {
+  .info__name {
     font-size: 27px;
     line-height: 32px;
     text-align: center;

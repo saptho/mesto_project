@@ -1,7 +1,7 @@
 const modalWindow = document.querySelector('.popup'); //нохожу попап в DOM
 const modalWindowCloseBtn = modalWindow.querySelector('.popup__button-close'); //нахожу кнопку закрытия попапа
 const profileInfoSection = document.querySelector('.profile'); //нахожу секцию с профилем
-const profileName = profileInfoSection.querySelector('.name');
+const profileName = profileInfoSection.querySelector('.info__name');
 const profileInfoAbout = profileInfoSection.querySelector('.info__about');
 const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit'); //нахожу кнопку редактирования инфы
 const formProfile = modalWindow.querySelector('.popup__content'); //нахожу форму
