@@ -7,33 +7,34 @@ const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit'
 const formProfile = modalWindow.querySelector('.form'); //нахожу форму
 const formInputName = formProfile.querySelector('.form__input_value_name'); //нахожу поля
 const formInputAbout = formProfile.querySelector('.form__input_value_about');
-
-//функция добавления модификатора класса
-function toggleModalWindow() {
-  modalWindow.classList.toggle('popup_opened')
-  formInputName.value = profileName.textContent;
-  formInputAbout.value = profileInfoAbout.textContent;
+//открытие формы
+function openForm() {
+  modalWindow.classList.add('popup_opened');
 }
-//при нажатии на кнопки класс добавляется/убирается
-editProfileInfoBtn.addEventListener('click', toggleModalWindow);
-modalWindowCloseBtn.addEventListener('click', toggleModalWindow);
-//функция закрытия попапа при нажатии на область вокруг него
+ //закрытие формы
+function closeForm() {
+  modalWindow.classList.remove('popup_opened');
+}
+//закрытие попапа при нажатии на область вокруг него
 function onOverlayClick(event) {
   if (event.target === event.currentTarget) {
-    toggleModalWindow();
+    closeForm();
   }
 }
-
-modalWindow.addEventListener('click', onOverlayClick)
-
-function formSubmitHandler(evt) {
+//сохранение инфы
+function saveProfileInfo(evt) {
   evt.preventDefault();
-
-  let profileNameNew = formFieldName.value;
-  let profileInfoAboutNew = formFieldAbout.value;
-  profileName.textContent = profileNameNew;
-  profileInfoAbout.textContent = profileInfoAboutNew;
-  toggleModalWindow();
+  profileName.textContent = formInputName.value;
+  profileInfoAbout.textContent = formInputAbout.value;
+  closeForm();
 }
-
-formProfile.addEventListener ('submit', formSubmitHandler);
+//слушатели событий
+modalWindow.addEventListener('click', onOverlayClick);
+modalWindowCloseBtn.addEventListener('click', closeForm);
+formProfile.addEventListener ('submit', saveProfileInfo);
+//тут я нагуглила стрелочную функцию
+editProfileInfoBtn.addEventListener('click', () => {
+  formInputName.value = profileName.textContent;
+  formInputAbout.value = profileInfoAbout.textContent;
+  openForm();
+})
