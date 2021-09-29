@@ -20,6 +20,7 @@
   .popup__button-close {
     width: 20px;
     height: 20px;
+    background-size: 100% 100%;
     top: -40px;
     right: 0;
   }

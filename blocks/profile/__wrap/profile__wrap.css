@@ -9,7 +9,7 @@
   }
 }
 
-@media screen and (max-width: 470px) {
+@media screen and (max-width: 540px) {
   .profile__wrap {
     flex-direction: column;
     justify-content: center;
