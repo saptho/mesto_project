@@ -1,5 +1,6 @@
 .profile__button-add {
   border: 2px solid #fff;
+  border-radius: 2px;
   box-sizing: border-box;
   background-image: url(../../../images/addbutton.svg);
   background-position: center;
