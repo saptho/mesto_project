@@ -4,15 +4,15 @@ const profileInfoSection = document.querySelector('.profile'); //нахожу с
 const profileName = profileInfoSection.querySelector('.info__name');
 const profileInfoAbout = profileInfoSection.querySelector('.info__about');
 const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit'); //нахожу кнопку редактирования инфы
-const formProfile = modalWindow.querySelector('.popup__content'); //нахожу форму
-const formFieldName = formProfile.querySelector('.popup__field-name'); //нахожу поля
-const formFieldAbout = formProfile.querySelector('.popup__field-about');
+const formProfile = modalWindow.querySelector('.form'); //нахожу форму
+const formInputName = formProfile.querySelector('.form__input_value_name'); //нахожу поля
+const formInputAbout = formProfile.querySelector('.form__input_value_about');
 
 //функция добавления модификатора класса
 function toggleModalWindow() {
   modalWindow.classList.toggle('popup_opened')
-  formFieldName.value = profileName.textContent;
-  formFieldAbout.value = profileInfoAbout.textContent;
+  formInputName.value = profileName.textContent;
+  formInputAbout.value = profileInfoAbout.textContent;
 }
 //при нажатии на кнопки класс добавляется/убирается
 editProfileInfoBtn.addEventListener('click', toggleModalWindow);
