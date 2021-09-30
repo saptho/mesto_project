@@ -21,6 +21,12 @@ function onOverlayClick(event) {
     closeForm();
   }
 }
+//заполнение полей значениями из страницы
+function writeinInputs() {
+  formInputName.value = profileName.textContent;
+  formInputAbout.value = profileInfoAbout.textContent;
+  openForm();
+}
 //сохранение инфы
 function saveProfileInfo(evt) {
   evt.preventDefault();
@@ -32,9 +38,4 @@ function saveProfileInfo(evt) {
 modalWindow.addEventListener('click', onOverlayClick);
 modalWindowCloseBtn.addEventListener('click', closeForm);
 formProfile.addEventListener ('submit', saveProfileInfo);
-//тут я нагуглила стрелочную функцию
-editProfileInfoBtn.addEventListener('click', () => {
-  formInputName.value = profileName.textContent;
-  formInputAbout.value = profileInfoAbout.textContent;
-  openForm();
-})
+editProfileInfoBtn.addEventListener('click', writeinInputs);
