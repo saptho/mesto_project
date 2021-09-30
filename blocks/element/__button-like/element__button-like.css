@@ -1,5 +1,5 @@
-.button-like {
-  background-image: url(../../images/like.svg);
+.element__button-like {
+  background-image: url(../../../images/like.svg);
   background-position: center;
   background-repeat: no-repeat;
   width: 22px;
@@ -8,7 +8,7 @@
   background-color: #fff;
 }
 
-.button-like:hover {
+.element__button-like:hover {
   cursor: pointer;
   opacity: .5;
 }
