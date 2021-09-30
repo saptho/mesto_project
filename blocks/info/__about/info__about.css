@@ -11,7 +11,7 @@
   line-height: 22px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 540px) {
   .info__about {
     font-size: 14px;
     line-height: 17px;
