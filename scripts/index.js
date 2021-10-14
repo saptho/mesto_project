@@ -1,6 +1,12 @@
 const modalWindow = document.querySelector('.popup'); //нохожу попап в DOM
 const modalWindowCloseBtn = modalWindow.querySelector('.popup__button-close'); //нахожу кнопку закрытия попапа
 const profileInfoSection = document.querySelector('.profile'); //нахожу секцию с профилем
+const profileName = profileInfoSection.querySelector('.info__name');
+const profileInfoAbout = profileInfoSection.querySelector('.info__about');
+const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit'); //нахожу кнопку редактирования инфы
+const formProfile = modalWindow.querySelector('.form'); //нахожу форму
+const formInputName = formProfile.querySelector('.form__input_value_name'); //нахожу поля
+const formInputAbout = formProfile.querySelector('.form__input_value_about');
 const initialCards = [
   {
     name: 'Архыз',
@@ -27,12 +33,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const profileName = profileInfoSection.querySelector('.info__name');
-const profileInfoAbout = profileInfoSection.querySelector('.info__about');
-const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit'); //нахожу кнопку редактирования инфы
-const formProfile = modalWindow.querySelector('.form'); //нахожу форму
-const formInputName = formProfile.querySelector('.form__input_value_name'); //нахожу поля
-const formInputAbout = formProfile.querySelector('.form__input_value_about');
 const cardTemplate = document.querySelector('#element-item-template').content;
 const cardContainer = document.querySelector('.elements');
 //открытие формы
@@ -62,13 +62,16 @@ function saveProfileInfo(evt) {
   profileInfoAbout.textContent = formInputAbout.value;
   closeForm();
 }
-//функциональные выражения
+//отображение карточек
 const renderCard = (card) => {
   const cardItem = cardTemplate.cloneNode(true);
   const cardCaption = cardItem.querySelector('.element__title');
   const cardLink = cardItem.querySelector('.element__card');
   cardCaption.textContent = card.name;
   cardLink.src = card.link;
+  cardItem.querySelector('.element__button-like').addEventListener('click', (event) => {
+    event.target.classList.toggle('element__button-like_active');
+  });
   cardContainer.append(cardItem);
 };
 initialCards.forEach(renderCard);
