@@ -48,10 +48,22 @@
         <button type="button" class="popup__button-close"></button>
       </div>
     </div>
+    <div class="popup popup_subject_card">
+      <div class="popup__content">
+        <h2 class="popup__title">Новое место</h2>
+        <form name="add-card-form" class="form">
+        <input type="text" name="place" placeholder="Название места" class="form__input form__input_value_place">
+        <input type="text" name="link" placeholder="Ссылка на картинку" class="form__input form__input_value_link">
+        <button type="submit" class="popup__submit">Создать</button>
+        </form>
+        <button type="button" class="popup__button-close"></button>
+      </div>
+    </div>
   </div>
 <template id="element-item-template">
   <figure class="element">
     <img class="element__card">
+    <button type="button" class="element__button-delete"></button>
     <figcaption class="element__caption">
       <h2 class="element__title"></h2>
       <button type="button" class="element__button-like"></button>
