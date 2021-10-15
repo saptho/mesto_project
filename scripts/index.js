@@ -84,6 +84,7 @@ const renderCard = (card) => {
   const cardLink = cardItem.querySelector('.element__card');
   cardCaption.textContent = card.name;
   cardLink.src = card.link;
+  cardLink.alt = 'Картинка ' + card.name;
   //лайк карточки
   cardItem.querySelector('.element__button-like').addEventListener('click', (event) => {
     event.target.classList.toggle('element__button-like_active');
@@ -97,6 +98,7 @@ const renderCard = (card) => {
   cardLink.addEventListener('click', (event) => {
     //получили изображение из ресурса элемента на который тыкнули
     popupImage.querySelector('.popup__image').src = event.target.src;
+    popupImage.querySelector('.popup__image').alt = event.target.alt;
     popupImage.querySelector('.popup__caption').textContent = cardCaption.textContent;
     openPopup(popupImage);
     popupImage.querySelector('.popup__button-close_subject_image').addEventListener('click', () => {
