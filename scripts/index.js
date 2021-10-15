@@ -46,6 +46,7 @@ const popupCardForm = document.querySelector('.popup_subject_card');
 const popupCardCloseBtn = document.querySelector('.popup__button-close_subject_card');
 const popupProfileForm = document.querySelector('.popup_subject_profile');
 const popupProfileCloseBtn = document.querySelector('.popup__button-close_subject_profile');
+const popupImage = document.querySelector('.popup_subject_image');
 //открытие попап
 function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -54,13 +55,6 @@ function openPopup (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
 }
-
-//закрытие попапа при нажатии на область вокруг него ПОКА НЕ РАБОТАЕТ
-/*function onOverlayClick(event) {
-  if (event.target === event.currentTarget) {
-    closeForm();
-  }
-}*/
 //заполнение полей значениями из страницы
 function writeinInputs() {
   formInputName.value = profileName.textContent;
@@ -79,12 +73,10 @@ function addNewCard(evt) {
   evt.preventDefault();
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector('.element__card').src = formInputLink.value;
-  console.log(cardElement.querySelector('.element__card').src);
   cardElement.querySelector('.element__title').textContent = formInputPlace.value;
   cardContainer.prepend(cardElement);
   closePopup(popupCardForm);
 }
-
 //отображение карточек
 const renderCard = (card) => {
   const cardItem = cardTemplate.cloneNode(true);
@@ -101,10 +93,19 @@ const renderCard = (card) => {
     event.target.closest('.element').remove();
   });
   cardContainer.append(cardItem);
+  //открытие изображения
+  cardLink.addEventListener('click', (event) => {
+    //получили изображение из ресурса элемента на который тыкнули
+    popupImage.querySelector('.popup__image').src = event.target.src;
+    popupImage.querySelector('.popup__caption').textContent = cardCaption.textContent;
+    openPopup(popupImage);
+    popupImage.querySelector('.popup__button-close_subject_image').addEventListener('click', () => {
+      closePopup(popupImage)
+    });
+  });
 };
 initialCards.forEach(renderCard);
 //слушатели событий
-/*modalWindow.addEventListener('click', onOverlayClick);*/
 popupCardCloseBtn.addEventListener('click', () => {
   closePopup(popupCardForm)
 });

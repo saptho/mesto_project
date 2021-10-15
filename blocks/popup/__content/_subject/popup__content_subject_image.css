@@ -1,0 +1,11 @@
+.popup__content_subject_image {
+  max-width: 75vw;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  box-shadow: unset;
+  border-radius: 0;
+  color: #fff;
+  padding: 0;
+  background-color: unset;
+}
