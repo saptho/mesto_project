@@ -43,9 +43,7 @@ const cardTemplate = document.querySelector('#element-item-template').content;
 const cardContainer = document.querySelector('.elements');
 //попапы редактирования профиля и добавления карточки
 const popupCardForm = document.querySelector('.popup_subject_card');
-const popupCardCloseBtn = document.querySelector('.popup__button-close_subject_card');
 const popupProfileForm = document.querySelector('.popup_subject_profile');
-const popupProfileCloseBtn = document.querySelector('.popup__button-close_subject_profile');
 const popupImage = document.querySelector('.popup_subject_image');
 //открытие попап
 function openPopup (popup) {
@@ -73,57 +71,52 @@ function saveProfileInfo(evt) {
   profileInfoAbout.textContent = formInputAbout.value;
   closePopup(popupProfileForm);
 }
-//добавление карточки
-function addNewCard(evt) {
-  evt.preventDefault();
+//создание новой карточки
+function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.element__card').src = formInputLink.value;
-  cardElement.querySelector('.element__title').textContent = formInputPlace.value;
-  cardContainer.prepend(cardElement);
-  formInputLink.value = '';
-  formInputPlace.value = '';
-  closePopup(popupCardForm);
-}
-//отображение карточек
-const renderCard = (card) => {
-  const cardItem = cardTemplate.cloneNode(true);
-  const cardCaption = cardItem.querySelector('.element__title');
-  const cardLink = cardItem.querySelector('.element__card');
-  cardCaption.textContent = card.name;
-  cardLink.src = card.link;
-  cardLink.alt = 'Картинка ' + card.name;
+  const cardCaption = cardElement.querySelector('.element__title');
+  const cardLink = cardElement.querySelector('.element__card');
+  cardCaption.textContent = name;
+  cardLink.src = link;
+  cardLink.alt = 'Картинка ' + name;
   //лайк карточки
-  cardItem.querySelector('.element__button-like').addEventListener('click', (event) => {
+  cardElement.querySelector('.element__button-like').addEventListener('click', (event) => {
     event.target.classList.toggle('element__button-like_active');
   });
   //удаление карточки
-  cardItem.querySelector('.element__button-delete').addEventListener('click', (event) => {
+  cardElement.querySelector('.element__button-delete').addEventListener('click', (event) => {
     event.target.closest('.element').remove();
   });
-  cardContainer.append(cardItem);
-  //открытие изображения
   cardLink.addEventListener('click', (event) => {
     //получили изображение из ресурса элемента на который тыкнули
     popupImage.querySelector('.popup__image').src = event.target.src;
     popupImage.querySelector('.popup__image').alt = event.target.alt;
     popupImage.querySelector('.popup__caption').textContent = cardCaption.textContent;
     openPopup(popupImage);
-    popupImage.querySelector('.popup__button-close_subject_image').addEventListener('click', () => {
-      closePopup(popupImage)
-    });
   });
-};
-initialCards.forEach(renderCard);
-//слушатели событий
-/*popupCardCloseBtn.addEventListener('click', () => {
-  closePopup(popupCardForm)
+  return cardElement;
+}
+//добавление карточек
+function renderCard(container, cardItem) {
+  container.prepend(cardItem);
+}
+//добавление данных для карточки
+function addDataCard(evt) {
+  evt.preventDefault();
+  renderCard(cardContainer, createCard(formInputPlace.value, formInputLink.value));
+  formInputLink.value = '';
+  formInputPlace.value = '';
+  closePopup(popupCardForm);
+}
+//отображение карточек
+initialCards.map(card => {
+  renderCard(cardContainer, createCard(card.name, card.link));
 });
-popupProfileCloseBtn.addEventListener('click', () => {
-  closePopup(popupProfileForm)
-});*/
+//слушатели событий
 formProfile.addEventListener ('submit', saveProfileInfo);
-formCard.addEventListener('submit', addNewCard);
+formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
 cardAddBtn.addEventListener('click', () => {
   openPopup(popupCardForm)
 });
+formCard.addEventListener('submit', createCard);
