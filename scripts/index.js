@@ -45,14 +45,10 @@ const cardContainer = document.querySelector('.elements');
 const popupCardForm = document.querySelector('.popup_subject_card');
 const popupProfileForm = document.querySelector('.popup_subject_profile');
 const popupImage = document.querySelector('.popup_subject_image');
+const closeBtns = document.querySelectorAll('.popup__button-close')
 //открытие попап
 function openPopup (popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('popup__button-close')) {
-      closePopup(popup)
-    }
-  });
 }
 //закрытие попап
 function closePopup (popup) {
@@ -113,6 +109,12 @@ initialCards.map(card => {
   renderCard(cardContainer, createCard(card.name, card.link));
 });
 //слушатели событий
+//слушатель на крестики
+closeBtns.forEach((item) => {
+  item.addEventListener('click', () => {
+    closePopup(item.closest('.popup'))
+  });
+});
 formProfile.addEventListener ('submit', saveProfileInfo);
 formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
