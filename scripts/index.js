@@ -75,6 +75,8 @@ function addNewCard(evt) {
   cardElement.querySelector('.element__card').src = formInputLink.value;
   cardElement.querySelector('.element__title').textContent = formInputPlace.value;
   cardContainer.prepend(cardElement);
+  formInputLink.value = '';
+  formInputPlace.value = '';
   closePopup(popupCardForm);
 }
 //отображение карточек
