@@ -24,7 +24,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-//секцию с профилем
+//секция с профилем
 const profileInfoSection = document.querySelector('.profile');
 const profileName = profileInfoSection.querySelector('.info__name');
 const profileInfoAbout = profileInfoSection.querySelector('.info__about');
@@ -50,6 +50,11 @@ const popupImage = document.querySelector('.popup_subject_image');
 //открытие попап
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('popup__button-close')) {
+      closePopup(popup)
+    }
+  });
 }
 //закрытие попап
 function closePopup (popup) {
@@ -110,12 +115,12 @@ const renderCard = (card) => {
 };
 initialCards.forEach(renderCard);
 //слушатели событий
-popupCardCloseBtn.addEventListener('click', () => {
+/*popupCardCloseBtn.addEventListener('click', () => {
   closePopup(popupCardForm)
 });
 popupProfileCloseBtn.addEventListener('click', () => {
   closePopup(popupProfileForm)
-});
+});*/
 formProfile.addEventListener ('submit', saveProfileInfo);
 formCard.addEventListener('submit', addNewCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
