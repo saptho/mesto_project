@@ -34,6 +34,7 @@ const cardAddBtn = profileInfoSection.querySelector('.profile__button-add');
 const formProfile = document.querySelector('.form_subject_profile');
 const formInputName = formProfile.querySelector('.form__input_value_name');
 const formInputAbout = formProfile.querySelector('.form__input_value_about');
+const formError = formProfile.querySelector(`.${formInputName.id}-error`);
 //форма добавления карточки
 const formCard = document.querySelector('.form_subject_card');
 const formInputPlace = formCard.querySelector('.form__input_value_place');
@@ -108,6 +109,30 @@ function addDataCard(evt) {
 initialCards.map(card => {
   renderCard(cardContainer, createCard(card.name, card.link));
 });
+
+//добавление класса с ошибкой
+const showInputError = (element, errorMessage) => {
+  element.classList.add('form__input_value_error');
+  formError.textContent = errorMessage;
+  formError.classList.add('form__input-error_active');
+}
+
+//удаление класса с ошибкой
+const hideInputError = (element) => {
+  element.classList.remove('form__input_value_error');
+  formError.classList.remove('form__input-error_active');
+  formError.textContent = '';
+}
+
+//проверка валидности поля
+const isValid = () => {
+  if (!formInputName.validity.valid) {
+    showInputError(formInputName, formInputName.validationMessage);
+  } else {
+    hideInputError(formInputName);
+  }
+}
+
 //слушатели событий
 //слушатель на крестики
 closeBtns.forEach((item) => {
@@ -122,3 +147,4 @@ cardAddBtn.addEventListener('click', () => {
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
+formInputName.addEventListener('input', isValid);

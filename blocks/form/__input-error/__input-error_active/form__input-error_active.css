@@ -1,0 +1,8 @@
+.form__input-error_active {
+  display: flex;
+  color: #f00;
+  font-size: 12px;
+  line-height: 15px;
+  margin: 5px 0 0;
+  padding: 0;
+}
