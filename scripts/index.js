@@ -31,14 +31,13 @@ const profileInfoAbout = profileInfoSection.querySelector('.info__about');
 const editProfileInfoBtn = profileInfoSection.querySelector('.info__button-edit');
 const cardAddBtn = profileInfoSection.querySelector('.profile__button-add');
 //форма редактирования профиля
-const formProfile = document.querySelector('.form_subject_profile');
-const formInputName = formProfile.querySelector('.form__input_value_name');
-const formInputAbout = formProfile.querySelector('.form__input_value_about');
-const formError = formProfile.querySelector(`.${formInputName.id}-error`);
+const formProfile = document.forms.edit_profile_form;
+const formInputName = formProfile.elements.user;
+const formInputAbout = formProfile.elements.about;
 //форма добавления карточки
-const formCard = document.querySelector('.form_subject_card');
-const formInputPlace = formCard.querySelector('.form__input_value_place');
-const formInputLink = formCard.querySelector('.form__input_value_link');
+const formCard = document.forms.add_card_form;
+const formInputPlace = formCard.elements.place;
+const formInputLink = formCard.elements.link;
 //шаблон
 const cardTemplate = document.querySelector('#element-item-template').content;
 const cardContainer = document.querySelector('.elements');
@@ -101,15 +100,13 @@ function renderCard(container, cardItem) {
 function addDataCard(evt) {
   evt.preventDefault();
   renderCard(cardContainer, createCard(formInputPlace.value, formInputLink.value));
-  formInputLink.value = '';
-  formInputPlace.value = '';
+  formCard.reset();
   closePopup(popupCardForm);
 }
 //отображение карточек
 initialCards.map(card => {
   renderCard(cardContainer, createCard(card.name, card.link));
 });
-
 //добавление класса с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -117,7 +114,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   errorElement.textContent = errorMessage;
   errorElement.classList.add('form__input-error_active');
 }
-
 //удаление класса с ошибкой
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -125,7 +121,6 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.classList.remove('form__input-error_active');
   errorElement.textContent = '';
 }
-
 //валидация поля
 const isValid = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
@@ -134,12 +129,30 @@ const isValid = (formElement, inputElement) => {
     hideInputError(formElement, inputElement);
   }
 }
+//проверка полей на наличие невалидных полей
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+//включение/отключение кнопки submit
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__submit_disabled');
+  } else {
+    buttonElement.classList.remove('popup__submit_disabled');
+  }
+}
 //назначение слушателя полю
 const setEventListener = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('form__input'));
+  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
+  console.log(inputList);
+  const buttonElement = formElement.querySelector('.popup__submit');
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () =>{
-      isValid(formElement, inputElement)
+    inputElement.addEventListener('input', function () {
+      isValid(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 }
@@ -153,7 +166,7 @@ const enableValidation = () => {
     setEventListener(formElement);
   });
 }
-enableValidation();
+
 //слушатели событий
 //слушатель на крестики
 closeBtns.forEach((item) => {
@@ -168,3 +181,4 @@ cardAddBtn.addEventListener('click', () => {
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
+enableValidation();
