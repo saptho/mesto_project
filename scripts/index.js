@@ -111,28 +111,49 @@ initialCards.map(card => {
 });
 
 //добавление класса с ошибкой
-const showInputError = (element, errorMessage) => {
-  element.classList.add('form__input_value_error');
-  formError.textContent = errorMessage;
-  formError.classList.add('form__input-error_active');
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__input_value_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
 }
 
 //удаление класса с ошибкой
-const hideInputError = (element) => {
-  element.classList.remove('form__input_value_error');
-  formError.classList.remove('form__input-error_active');
-  formError.textContent = '';
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__input_value_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
 }
 
-//проверка валидности поля
-const isValid = () => {
-  if (!formInputName.validity.valid) {
-    showInputError(formInputName, formInputName.validationMessage);
+//валидация поля
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideInputError(formInputName);
+    hideInputError(formElement, inputElement);
   }
 }
-
+//назначение слушателя полю
+const setEventListener = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('form__input'));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', () =>{
+      isValid(formElement, inputElement)
+    });
+  });
+}
+//включение валидации для формы
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('form'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListener(formElement);
+  });
+}
+enableValidation();
 //слушатели событий
 //слушатель на крестики
 closeBtns.forEach((item) => {
@@ -147,4 +168,3 @@ cardAddBtn.addEventListener('click', () => {
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
-formInputName.addEventListener('input', isValid);
