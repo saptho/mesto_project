@@ -1,0 +1,6 @@
+.popup__submit_disabled {
+  background-color: inherit;
+  color: #000;
+  border: 1px solid rgba(0, 0, 0, 1);
+  opacity: 0.2;
+}
