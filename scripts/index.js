@@ -46,6 +46,7 @@ const popupCardForm = document.querySelector('.popup_subject_card');
 const popupProfileForm = document.querySelector('.popup_subject_profile');
 const popupImage = document.querySelector('.popup_subject_image');
 const closeBtns = document.querySelectorAll('.popup__button-close')
+
 //открытие попап
 function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -146,7 +147,6 @@ const toggleButtonState = (inputList, buttonElement) => {
 //назначение слушателя полю
 const setEventListener = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-  console.log(inputList);
   const buttonElement = formElement.querySelector('.popup__submit');
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
