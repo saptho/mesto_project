@@ -63,7 +63,6 @@ function closePopup (popup) {
 function closePopupbyEcs (evt) {
   if (evt.key === "Escape") {
     Array.from(document.querySelectorAll('.popup_opened')).forEach((popupElement) => {
-      formCard.reset();
       closePopup(popupElement);
     });
   }
@@ -72,7 +71,6 @@ function closePopupbyEcs (evt) {
 function closePopupbyOverlayClick (evt) {
   if (evt.target.classList.contains('popup')) {
     Array.from(document.querySelectorAll('.popup')).forEach((popupElement) => {
-      formCard.reset();
       closePopup(popupElement);
     });
   }
@@ -145,6 +143,7 @@ formProfile.addEventListener ('submit', saveProfileInfo);
 formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
 cardAddBtn.addEventListener('click', () => {
+  formCard.reset();
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
