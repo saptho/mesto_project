@@ -50,10 +50,30 @@ const closeBtns = document.querySelectorAll('.popup__button-close')
 //открытие попап
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupbyEcs);
+  document.addEventListener('click', closePopupbyOverlayClick);
 }
 //закрытие попап
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupbyEcs);
+  document.removeEventListener('click', closePopupbyOverlayClick);
+}
+//закрытие попап по кнопке ESC
+function closePopupbyEcs (evt) {
+  if (evt.key === "Escape") {
+    Array.from(document.querySelectorAll('.popup_opened')).forEach((popupElement) => {
+      formCard.reset();
+      closePopup(popupElement);
+    });
+  }
+}
+function closePopupbyOverlayClick (evt) {
+  if (evt.target.classList.contains('popup')) {
+    Array.from(document.querySelectorAll('.popup')).forEach((popupElement) => {
+      closePopup(popupElement);
+    });
+  }
 }
 //заполнение полей значениями из страницы
 function writeinInputs() {
@@ -144,11 +164,12 @@ const toggleButtonState = (inputList, buttonElement) => {
     buttonElement.classList.remove('popup__submit_disabled');
   }
 }
-//назначение слушателя полю
+//назначение слушателей полю
 const setEventListener = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__input'));
   const buttonElement = formElement.querySelector('.popup__submit');
   toggleButtonState(inputList, buttonElement);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       isValid(formElement, inputElement);
@@ -158,7 +179,7 @@ const setEventListener = (formElement) => {
 }
 //включение валидации для формы
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('form'));
+  const formList = Array.from(document.querySelectorAll('.form'));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
@@ -166,7 +187,6 @@ const enableValidation = () => {
     setEventListener(formElement);
   });
 }
-
 //слушатели событий
 //слушатель на крестики
 closeBtns.forEach((item) => {
