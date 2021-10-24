@@ -62,17 +62,14 @@ function closePopup (popup) {
 //закрытие попап по кнопке ESC
 function closePopupbyEcs (evt) {
   if (evt.key === "Escape") {
-    Array.from(document.querySelectorAll('.popup_opened')).forEach((popupElement) => {
-      closePopup(popupElement);
-    });
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
   }
 }
 //закрытие попап по клику на оверлей
 function closePopupbyOverlayClick (evt) {
   if (evt.target.classList.contains('popup')) {
-    Array.from(document.querySelectorAll('.popup')).forEach((popupElement) => {
-      closePopup(popupElement);
-    });
+      closePopup(evt.target);
   }
 }
 //заполнение полей значениями из страницы
