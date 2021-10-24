@@ -62,19 +62,14 @@ function closePopup (popup) {
 //закрытие попап по кнопке ESC
 function closePopupbyEcs (evt) {
   if (evt.key === "Escape") {
-    Array.from(document.querySelectorAll('.popup_opened')).forEach((popupElement) => {
-      formCard.reset();
-      closePopup(popupElement);
-    });
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
   }
 }
 //закрытие попап по клику на оверлей
 function closePopupbyOverlayClick (evt) {
   if (evt.target.classList.contains('popup')) {
-    Array.from(document.querySelectorAll('.popup')).forEach((popupElement) => {
-      formCard.reset();
-      closePopup(popupElement);
-    });
+      closePopup(evt.target);
   }
 }
 //заполнение полей значениями из страницы
@@ -95,6 +90,8 @@ function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardCaption = cardElement.querySelector('.element__title');
   const cardLink = cardElement.querySelector('.element__card');
+  const imageElement = popupImage.querySelector('.popup__image');
+  const imageElementDescription = popupImage.querySelector('.popup__caption')
   cardCaption.textContent = name;
   cardLink.src = link;
   cardLink.alt = 'Картинка ' + name;
@@ -106,11 +103,12 @@ function createCard(name, link) {
   cardElement.querySelector('.element__button-delete').addEventListener('click', (event) => {
     event.target.closest('.element').remove();
   });
+  //открытие изображения по клику
   cardLink.addEventListener('click', (event) => {
     //получили изображение из ресурса элемента на который тыкнули
-    popupImage.querySelector('.popup__image').src = event.target.src;
-    popupImage.querySelector('.popup__image').alt = event.target.alt;
-    popupImage.querySelector('.popup__caption').textContent = cardCaption.textContent;
+    imageElement.src = event.target.src;
+    imageElement.alt = event.target.alt;
+    imageElementDescription.textContent = cardCaption.textContent;
     openPopup(popupImage);
   });
   return cardElement;
@@ -142,6 +140,7 @@ formProfile.addEventListener ('submit', saveProfileInfo);
 formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
 cardAddBtn.addEventListener('click', () => {
+  formCard.reset();
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
