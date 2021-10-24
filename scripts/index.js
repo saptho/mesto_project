@@ -95,6 +95,8 @@ function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardCaption = cardElement.querySelector('.element__title');
   const cardLink = cardElement.querySelector('.element__card');
+  const imageElement = popupImage.querySelector('.popup__image');
+  const imageElementDescription = popupImage.querySelector('.popup__caption')
   cardCaption.textContent = name;
   cardLink.src = link;
   cardLink.alt = 'Картинка ' + name;
@@ -106,11 +108,12 @@ function createCard(name, link) {
   cardElement.querySelector('.element__button-delete').addEventListener('click', (event) => {
     event.target.closest('.element').remove();
   });
+  //открытие изображения по клику
   cardLink.addEventListener('click', (event) => {
     //получили изображение из ресурса элемента на который тыкнули
-    popupImage.querySelector('.popup__image').src = event.target.src;
-    popupImage.querySelector('.popup__image').alt = event.target.alt;
-    popupImage.querySelector('.popup__caption').textContent = cardCaption.textContent;
+    imageElement.src = event.target.src;
+    imageElement.alt = event.target.alt;
+    imageElementDescription.textContent = cardCaption.textContent;
     openPopup(popupImage);
   });
   return cardElement;
