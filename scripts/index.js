@@ -68,9 +68,11 @@ function closePopupbyEcs (evt) {
     });
   }
 }
+//закрытие попап по клику на оверлей
 function closePopupbyOverlayClick (evt) {
   if (evt.target.classList.contains('popup')) {
     Array.from(document.querySelectorAll('.popup')).forEach((popupElement) => {
+      formCard.reset();
       closePopup(popupElement);
     });
   }
@@ -128,65 +130,7 @@ function addDataCard(evt) {
 initialCards.map(card => {
   renderCard(cardContainer, createCard(card.name, card.link));
 });
-//добавление класса с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__input_value_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error_active');
-}
-//удаление класса с ошибкой
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__input_value_error');
-  errorElement.classList.remove('form__input-error_active');
-  errorElement.textContent = '';
-}
-//валидация поля
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-}
-//проверка полей на наличие невалидных полей
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-//включение/отключение кнопки submit
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__submit_disabled');
-  } else {
-    buttonElement.classList.remove('popup__submit_disabled');
-  }
-}
-//назначение слушателей полю
-const setEventListener = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-  const buttonElement = formElement.querySelector('.popup__submit');
-  toggleButtonState(inputList, buttonElement);
 
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      isValid(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-//включение валидации для формы
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListener(formElement);
-  });
-}
 //слушатели событий
 //слушатель на крестики
 closeBtns.forEach((item) => {
@@ -201,4 +145,3 @@ cardAddBtn.addEventListener('click', () => {
   openPopup(popupCardForm)
 });
 formCard.addEventListener('submit', createCard);
-enableValidation();
