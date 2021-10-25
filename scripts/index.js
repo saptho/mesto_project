@@ -140,6 +140,8 @@ formProfile.addEventListener ('submit', saveProfileInfo);
 formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
 cardAddBtn.addEventListener('click', () => {
+  formCard.elements.popup_card_submit.disabled = true;
+  formCard.elements.popup_card_submit.classList.add('popup__submit_disabled');
   formCard.reset();
   openPopup(popupCardForm);
 });
