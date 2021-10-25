@@ -41,11 +41,13 @@ const formInputLink = formCard.elements.link;
 //шаблон
 const cardTemplate = document.querySelector('#element-item-template').content;
 const cardContainer = document.querySelector('.elements');
-//попапы редактирования профиля и добавления карточки
+//попапы редактирования профиля, добавления карточки и изображения
 const popupCardForm = document.querySelector('.popup_subject_card');
 const popupProfileForm = document.querySelector('.popup_subject_profile');
 const popupImage = document.querySelector('.popup_subject_image');
-const closeBtns = document.querySelectorAll('.popup__button-close')
+const closeBtns = document.querySelectorAll('.popup__button-close');
+const imageElement = popupImage.querySelector('.popup__image');
+const imageElementDescription = popupImage.querySelector('.popup__caption');
 
 //открытие попап
 function openPopup (popup) {
@@ -90,8 +92,6 @@ function createCard(name, link) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardCaption = cardElement.querySelector('.element__title');
   const cardLink = cardElement.querySelector('.element__card');
-  const imageElement = popupImage.querySelector('.popup__image');
-  const imageElementDescription = popupImage.querySelector('.popup__caption')
   cardCaption.textContent = name;
   cardLink.src = link;
   cardLink.alt = 'Картинка ' + name;
@@ -141,6 +141,6 @@ formCard.addEventListener('submit', addDataCard);
 editProfileInfoBtn.addEventListener('click', writeinInputs);
 cardAddBtn.addEventListener('click', () => {
   formCard.reset();
-  openPopup(popupCardForm)
+  openPopup(popupCardForm);
 });
 formCard.addEventListener('submit', createCard);
